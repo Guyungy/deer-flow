@@ -20,6 +20,7 @@ from app.gateway.routers import (
     thread_runs,
     threads,
     uploads,
+    wechat,
 )
 from deerflow.config.app_config import get_app_config
 
@@ -160,6 +161,10 @@ This gateway provides custom endpoints for models, MCP configuration, skills, an
                 "name": "health",
                 "description": "Health check and system status endpoints",
             },
+            {
+                "name": "wechat",
+                "description": "Hot-topic writing, evidence, templates, and article management for the DeerFlow migration",
+            },
         ],
     )
 
@@ -204,6 +209,9 @@ This gateway provides custom endpoints for models, MCP configuration, skills, an
 
     # Stateless Runs API (stream/wait without a pre-existing thread)
     app.include_router(runs.router)
+
+    # DeerFlow-native WeChat migration APIs
+    app.include_router(wechat.router)
 
     @app.get("/health", tags=["health"])
     async def health_check() -> dict:
