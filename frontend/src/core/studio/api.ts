@@ -1,6 +1,10 @@
 import { getBackendBaseURL } from "@/core/config";
 
-import type { CreateStudioTaskRequest, StudioTask } from "./types";
+import type {
+  CreateStudioTaskRequest,
+  StudioTask,
+  StudioTaskDetail,
+} from "./types";
 
 export async function loadStudioTasks(): Promise<StudioTask[]> {
   const res = await fetch(`${getBackendBaseURL()}/api/studio/tasks`);
@@ -28,7 +32,7 @@ export async function createStudioTask(
   return res.json() as Promise<StudioTask>;
 }
 
-export async function loadStudioTask(taskId: string): Promise<StudioTask> {
+export async function loadStudioTask(taskId: string): Promise<StudioTaskDetail> {
   const res = await fetch(`${getBackendBaseURL()}/api/studio/tasks/${taskId}`);
   if (!res.ok) {
     const err = (await res.json().catch(() => ({}))) as { detail?: string };
@@ -36,5 +40,5 @@ export async function loadStudioTask(taskId: string): Promise<StudioTask> {
       err.detail ?? `Failed to load studio task: ${res.statusText}`,
     );
   }
-  return res.json() as Promise<StudioTask>;
+  return res.json() as Promise<StudioTaskDetail>;
 }

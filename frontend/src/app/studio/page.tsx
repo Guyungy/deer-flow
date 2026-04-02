@@ -28,7 +28,7 @@ export default function StudioPage() {
           </p>
           <h1 className="mt-3 text-4xl font-semibold">创作工作台</h1>
           <p className="mt-3 max-w-3xl text-base text-[#d3cdc7]">
-            现在已经接上第一版 studio task API，可以创建内容任务、落盘保存，并进入任务详情页查看上下文。
+            这里已经接通了第一版 studio task API。现在可以创建内容任务、持久化保存，并进入详情页查看热点和素材上下文。
           </p>
         </div>
 
