@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 import { useCreateStudioTask, useStudioTasks } from "@/core/studio";
@@ -27,7 +28,7 @@ export default function StudioPage() {
           </p>
           <h1 className="mt-3 text-4xl font-semibold">创作工作台</h1>
           <p className="mt-3 max-w-3xl text-base text-[#d3cdc7]">
-            现在已经接上第一版 studio task API，可以创建内容任务并保留到本地数据层。
+            现在已经接上第一版 studio task API，可以创建内容任务、落盘保存，并进入任务详情页查看上下文。
           </p>
         </div>
 
@@ -96,13 +97,23 @@ export default function StudioPage() {
                     className="rounded-2xl bg-white p-5 shadow-[0_20px_40px_rgba(43,31,19,0.08)]"
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <h3 className="text-lg font-semibold">{task.topic}</h3>
+                      <h3 className="text-lg font-semibold">
+                        <Link
+                          href={`/studio/${task.task_id}`}
+                          className="underline decoration-dotted underline-offset-4"
+                        >
+                          {task.topic}
+                        </Link>
+                      </h3>
                       <span className="rounded-full bg-[#f4e4d3] px-3 py-1 text-xs text-[#8e6848]">
                         {task.status}
                       </span>
                     </div>
                     <p className="mt-3 text-sm text-[#65594f]">
                       当前阶段: {task.current_stage} | 平台: {task.target_platform}
+                    </p>
+                    <p className="mt-2 line-clamp-2 text-sm text-[#7a6f65]">
+                      {task.brief}
                     </p>
                     <p className="mt-1 text-xs text-[#8f8478]">
                       Task ID: {task.task_id}
