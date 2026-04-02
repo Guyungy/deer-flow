@@ -11,14 +11,11 @@ from app.gateway.routers import (
     artifacts,
     assistants_compat,
     channels,
-    hot_topics,
-    materials,
     mcp,
     memory,
     models,
     runs,
     skills,
-    studio,
     suggestions,
     thread_runs,
     threads,
@@ -168,18 +165,6 @@ This gateway provides custom endpoints for models, MCP configuration, skills, an
                 "name": "wechat",
                 "description": "Hot-topic writing, evidence, templates, and article management for the DeerFlow migration",
             },
-            {
-                "name": "hot-topics",
-                "description": "Hot-topic radar endpoints for the newsroom content suite",
-            },
-            {
-                "name": "materials",
-                "description": "Material library ingestion and listing endpoints for the newsroom content suite",
-            },
-            {
-                "name": "studio",
-                "description": "Task-oriented newsroom studio endpoints for article production",
-            },
         ],
     )
 
@@ -197,15 +182,6 @@ This gateway provides custom endpoints for models, MCP configuration, skills, an
 
     # Skills API is mounted at /api/skills
     app.include_router(skills.router)
-
-    # Hot topic radar API
-    app.include_router(hot_topics.router)
-
-    # Material library API
-    app.include_router(materials.router)
-
-    # Studio task API
-    app.include_router(studio.router)
 
     # Artifacts API is mounted at /api/threads/{thread_id}/artifacts
     app.include_router(artifacts.router)
