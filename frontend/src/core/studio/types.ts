@@ -7,8 +7,6 @@ export interface StudioTask {
   agent_name: string;
   status: string;
   current_stage: string;
-  brief: string;
-  stage_notes: string[];
   created_at: number;
   updated_at: number;
 }
@@ -19,5 +17,4 @@ export interface CreateStudioTaskRequest {
   material_ids?: string[];
   target_platform?: string;
   agent_name?: string;
-  brief?: string;
 }
