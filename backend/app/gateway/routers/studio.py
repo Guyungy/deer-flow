@@ -3,14 +3,7 @@ from __future__ import annotations
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
-from app.services.studio import (
-    StudioTask,
-    StudioTaskCreateRequest,
-    StudioTaskDetail,
-    create_studio_task,
-    get_studio_task_detail,
-    list_studio_tasks,
-)
+from app.services.studio import StudioTask, StudioTaskCreateRequest, create_studio_task, get_studio_task, list_studio_tasks
 
 router = APIRouter(prefix="/api/studio/tasks", tags=["studio"])
 
@@ -29,9 +22,9 @@ async def post_task(body: StudioTaskCreateRequest) -> StudioTask:
     return create_studio_task(body)
 
 
-@router.get("/{task_id}", response_model=StudioTaskDetail, summary="Get a newsroom studio task")
-async def get_task(task_id: str) -> StudioTaskDetail:
-    task = get_studio_task_detail(task_id)
+@router.get("/{task_id}", response_model=StudioTask, summary="Get a newsroom studio task")
+async def get_task(task_id: str) -> StudioTask:
+    task = get_studio_task(task_id)
     if task is None:
         raise HTTPException(status_code=404, detail=f"Studio task '{task_id}' not found")
     return task

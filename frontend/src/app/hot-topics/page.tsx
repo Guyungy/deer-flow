@@ -18,7 +18,7 @@ export default function HotTopicsPage() {
             </p>
             <h1 className="mt-3 text-4xl font-semibold">热点中心</h1>
             <p className="mt-3 max-w-3xl text-base text-[#5b534a]">
-              第一版热点中心已经接入真实搜索聚合。现在可以刷新热点候选，并把热点直接推进到创作工作台。
+              第一版热点中心已接入真实搜索聚合。现在可以刷新热点候选，并把热点直接推进到创作工作台。
             </p>
           </div>
           <button
@@ -69,14 +69,12 @@ export default function HotTopicsPage() {
                   {topic.summary}
                 </p>
                 <div className="mt-4 rounded-2xl bg-[#faf4ec] p-4 text-sm text-[#5f4a38]">
-                  <p className="font-medium">推荐切入角度</p>
+                  <p className="font-medium">推荐切入角</p>
                   <p className="mt-2 leading-6">{topic.recommended_angle}</p>
                 </div>
                 <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
                   <div className="text-xs text-[#7f7368]">
-                    {topic.source_site
-                      ? `来源站点: ${topic.source_site}`
-                      : "来源站点待确认"}
+                    {topic.source_site ? `来源站点: ${topic.source_site}` : "来源站点待确认"}
                   </div>
                   <button
                     className="rounded-full border border-[#d7c7b5] px-4 py-2 text-sm font-medium text-[#5a4331] disabled:opacity-60"
@@ -87,7 +85,6 @@ export default function HotTopicsPage() {
                         topic_id: topic.topic_id,
                         target_platform: "wechat",
                         agent_name: "news-room",
-                        brief: topic.recommended_angle,
                       });
                     }}
                   >

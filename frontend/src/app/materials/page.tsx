@@ -22,7 +22,7 @@ export default function MaterialsPage() {
           </p>
           <h1 className="mt-3 text-4xl font-semibold">素材文库</h1>
           <p className="mt-3 max-w-3xl text-base text-[#525252]">
-            第一阶段已经打通本地素材落盘、列表读取和详情预览。现在支持手动录入和链接采集，下一步会继续补正文清洗、标签增强和语义检索。
+            第一阶段已经打通本地素材落盘、列表读取和详情预览。现在支持手动录入和链接采集，下一步继续补正文清洗、标签增强和语义检索。
           </p>
         </div>
 
