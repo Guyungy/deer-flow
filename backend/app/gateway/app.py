@@ -3,6 +3,7 @@ from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.gateway.config import get_gateway_config
 from app.gateway.deps import langgraph_runtime
@@ -16,6 +17,7 @@ from app.gateway.routers import (
     models,
     runs,
     skills,
+    studio,
     suggestions,
     thread_runs,
     threads,
@@ -165,10 +167,21 @@ This gateway provides custom endpoints for models, MCP configuration, skills, an
                 "name": "wechat",
                 "description": "Hot-topic writing, evidence, templates, and article management for the DeerFlow migration",
             },
+            {
+                "name": "studio",
+                "description": "Minimal chat-style content studio tasks",
+            },
         ],
     )
 
-    # CORS is handled by nginx - no need for FastAPI middleware
+    config = get_gateway_config()
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=config.cors_origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     # Include routers
     # Models API is mounted at /api/models
@@ -182,6 +195,9 @@ This gateway provides custom endpoints for models, MCP configuration, skills, an
 
     # Skills API is mounted at /api/skills
     app.include_router(skills.router)
+
+    # Studio API is mounted at /api/studio/tasks
+    app.include_router(studio.router)
 
     # Artifacts API is mounted at /api/threads/{thread_id}/artifacts
     app.include_router(artifacts.router)

@@ -14,8 +14,14 @@ export const SubtaskContext = createContext<SubtaskContextValue>({
   },
 });
 
-export function SubtasksProvider({ children }: { children: React.ReactNode }) {
-  const [tasks, setTasks] = useState<Record<string, Subtask>>({});
+export function SubtasksProvider({
+  children,
+  initialTasks = {},
+}: {
+  children: React.ReactNode;
+  initialTasks?: Record<string, Subtask>;
+}) {
+  const [tasks, setTasks] = useState<Record<string, Subtask>>(initialTasks);
   return (
     <SubtaskContext.Provider value={{ tasks, setTasks }}>
       {children}
