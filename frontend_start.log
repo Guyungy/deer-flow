@@ -1,0 +1,2 @@
+'"cd frontend && set PORT=3100 && pnpm run dev -- -p 3100"' 不是内部或外部命令，也不是可运行的程序
+或批处理文件。

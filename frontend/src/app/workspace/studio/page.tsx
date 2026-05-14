@@ -1,43 +1,30 @@
-import fs from "fs";
-import path from "path";
+"use client";
 
-import { redirect } from "next/navigation";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
+import { StudioTaskList } from "@/components/workspace/studio/studio-task-list";
+import { WorkspaceContainer, WorkspaceHeader } from "@/components/workspace/workspace-container";
 
 import { StudioEmptyState } from "./studio-empty-state";
 
-interface StoredStudioTask {
-  task_id: string;
-}
-
-function readStudioTasks(): StoredStudioTask[] {
-  const filePath = path.resolve(
-    process.cwd(),
-    "..",
-    "backend",
-    ".deer-flow",
-    "content-suite",
-    "studio_tasks.json",
+export default function StudioPage() {
+  return (
+    <WorkspaceContainer>
+      <WorkspaceHeader />
+      <div className="relative flex min-h-0 w-full flex-1">
+        <ResizablePanelGroup orientation="horizontal" className="h-full w-full">
+          <ResizablePanel defaultSize={20} minSize={15} maxSize={30} className="border-r">
+            <StudioTaskList />
+          </ResizablePanel>
+          <ResizableHandle withHandle />
+          <ResizablePanel defaultSize={80}>
+            <StudioEmptyState />
+          </ResizablePanel>
+        </ResizablePanelGroup>
+      </div>
+    </WorkspaceContainer>
   );
-
-  if (!fs.existsSync(filePath)) {
-    return [];
-  }
-
-  try {
-    const raw = fs.readFileSync(filePath, "utf-8");
-    const data = JSON.parse(raw) as StoredStudioTask[];
-    return Array.isArray(data) ? data : [];
-  } catch {
-    return [];
-  }
-}
-
-export default function WorkspaceStudioPage() {
-  const tasks = readStudioTasks();
-
-  if (tasks.length > 0) {
-    redirect(`/workspace/studio/${tasks[0]!.task_id}`);
-  }
-
-  return <StudioEmptyState />;
 }

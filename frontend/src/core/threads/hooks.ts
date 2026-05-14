@@ -435,6 +435,7 @@ export function useThreads(
   const apiClient = getAPIClient();
   return useQuery<AgentThread[]>({
     queryKey: ["threads", "search", params],
+    retry: false,
     queryFn: async () => {
       const maxResults = params.limit;
       const initialOffset = params.offset ?? 0;
